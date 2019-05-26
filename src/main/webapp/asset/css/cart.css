@@ -1,0 +1,70 @@
+
+.card-table dt {
+    font-weight: 200;
+}
+
+.card-table a {
+    color: #666;
+}
+
+.card-table a:hover {
+    color: #ff1654;
+    text-decoration: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.fixed-bottom {
+    position: fixed;
+    bottom: 0px;
+    z-index: 999;
+    background: #fff;
+    left: 0;
+    width: 100%;
+    border-width: 1px 0;
+    border-top: 1px solid #f0f0f0 \9;
+    box-shadow: 0 -1px 8px rgba(0, 1, 1, 0.08);
+}
+
+.handler {
+    display: flex;
+    align-items: center;
+}
+
+.cart-toolbar {
+    height: 50px;
+    border: 1px solid #f0f0f0;
+    background: #fff;
+}
+
+.count {
+    color: #ff1654;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.pay {
+    width: 100px;
+    height: 50px;
+    margin-left: 10px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+.pay a {
+    color: white;
+    font-weight: 500;
+}
+
+.pay a:hover {
+    text-decoration: none;
+}

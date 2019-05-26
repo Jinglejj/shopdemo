@@ -1,0 +1,26 @@
+body{
+    background-color: #f5f7fb;
+}
+
+.carts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #87B7CB;
+    position: fixed;
+    top: 30vh;
+    right: 0;
+    width: 30px;
+    height: 150px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.carts:hover {
+    background-color: #B8E0D8
+}
+
+.carts span {
+    display: block;
+}

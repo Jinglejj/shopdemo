@@ -1,0 +1,59 @@
+
+.auction {
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+.auction:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+}
+
+.auction a {
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.auction .info {
+    width: 90%;
+    margin: auto;
+}
+
+.auction .image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.auction .image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.price {
+    color: #FF1654;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.sell {
+    float: right;
+    color: #73ABC2;
+    line-height: 28px;
+}
+
+.btn-addcard {
+    background-color: #FF1654;
+    color: white
+}
+
+.btn.focus,
+.btn:focus,
+.btn:hover {
+    color: white;
+    text-decoration: none;
+}
+

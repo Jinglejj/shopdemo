@@ -1,0 +1,31 @@
+.search-form {
+    width: 70%;
+    display: flex;
+    margin: auto
+}
+
+.search-form .input-container {
+    border: 3px solid #ff5e89;
+    border-radius: 40px 0 0 40px;
+    width: 90%;
+    padding: 6px 10px;
+    height: 38px;
+}
+
+.search-form .input-container input:focus {
+    border-style: none;
+    outline: none;
+}
+
+.search-form .input-container input {
+    width: 80%;
+    border-style: none;
+}
+
+.search-form .btn-search {
+    border-style: none;
+    font-size: 18px;
+    width: 10%;
+    background-color: #ff5e89;
+    color: white;
+}
