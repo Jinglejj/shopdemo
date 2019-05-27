@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class AuctionDaoImpl implements AuctionDao {
     private static List<AuctionDO> auctionList = new ArrayList<>();
-
+    private static String[] categoryNames = {"女装", "母婴", "家电", "国际", "美妆", "鞋包", "男装"};
     static {
         DecimalFormat df = new DecimalFormat("#.00");
         for (int i = 0; i < 100; i++) {
@@ -30,9 +30,10 @@ public class AuctionDaoImpl implements AuctionDao {
             BigDecimal bg = new BigDecimal(currentPrice).setScale(2, RoundingMode.UP);
             auctionDO.setCurrentPrice(Double.valueOf(df.format(currentPrice)));
             auctionDO.setHisPrice(Double.valueOf(df.format(bg.doubleValue() - (int)(Math.random() * 200) + 100)));
-            auctionDO.setDescription("描述" + "商品" + i + "描述" + "商品" + i + "描述" + "商品" + i + "描述" + "商品" + i + "描述" + "商品" + i + "描述" + "商品" + i + "描述");
             auctionDO.setNumber((int) (Math.random() * 10000) + 1000);
             auctionDO.setSellNumber((int) (Math.random() * 1000) + 1000);
+            auctionDO.setCategoryId((int)(Math.random()*7));
+            auctionDO.setDescription(new String(new char[9]).replace("\0",(categoryNames[auctionDO.getCategoryId()]+i)));
             auctionList.add(auctionDO);
         }
     }

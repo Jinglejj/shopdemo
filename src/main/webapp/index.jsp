@@ -20,16 +20,16 @@
   <div class="container">
     <jsp:include page="/jsp/top.jsp" />
     <div class="container">
-      <form action="/searchAuctionByName" class="search-form">
+      <form action="${pageContext.request.contextPath}/searchAuctionByName" class="search-form">
         <div class="input-container">
           <input type="text" name="keyword">
         </div>
         <button class="btn-search" type="submit">搜索</button>
       </form>
     </div>
-
+    <div style="margin: 30px"></div>
+    <jsp:include page="/jsp/category.jsp" />
     <div class="container auction-container">
-
     </div>
 
   </div>

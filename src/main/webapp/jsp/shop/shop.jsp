@@ -24,8 +24,9 @@
 <body>
 <div class="container">
     <jsp:include page="/jsp/top.jsp"/>
+
     <div class="container">
-        <form action="/searchAuctionByName" class="search-form">
+        <form action="${pageContext.request.contextPath}/searchAuctionByName" class="search-form">
             <div class="input-container">
                 <input type="text" name="keyword" value="${keyword}" required>
             </div>
@@ -33,6 +34,7 @@
         </form>
     </div>
     <div style="margin: 30px"></div>
+    <jsp:include page="/jsp/category.jsp" />
     <div>
         <c:forEach items="${auctionList}" var="auction">
             <div class="col-xs-6 col-sm-3 auction card">

@@ -2,6 +2,7 @@ package servlet;
 
 import dao.AuctionDao;
 import entity.AuctionDO;
+import util.Constant;
 import util.DaoFactory;
 
 import javax.servlet.ServletException;
@@ -28,8 +29,8 @@ public class SearchAuctionByName extends HttpServlet {
         String keyword = req.getParameter("keyword");
         System.out.println("关键字============" + keyword);
         List<AuctionDO> auctionList=auctionDao.findAuctionByName(keyword);
-        req.setAttribute("auctionList", auctionList);
-        req.setAttribute("keyword",keyword);
+        req.setAttribute(Constant.AUCTION_LIST, auctionList);
+        req.setAttribute(Constant.KEYWORD,keyword);
         System.out.println(auctionList);
         String path = req.getContextPath() + "/jsp/shop/shop.jsp";
         System.out.println(path);

@@ -18,7 +18,8 @@ public class LoginOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
-        String path=req.getContextPath();
+        String path=req.getContextPath()+"/index.jsp";
+        System.out.println(path);
         resp.sendRedirect(path);
     }
 

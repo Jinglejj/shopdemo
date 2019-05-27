@@ -60,7 +60,7 @@
                 <div class="col col-login mx-auto">
                     <div class="text-center mb-6">
                     </div>
-                    <form class="card" action="/login" method="post">
+                    <form class="card" action="${pageContext.request.contextPath}/login" method="post">
                         <div class="card-body p-6">
                             <div class="form-group">
                                 <label class="form-label">用户名</label>

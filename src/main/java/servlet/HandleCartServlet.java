@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +33,10 @@ public class HandleCartServlet extends HttpServlet {
         Map<Integer, CartDO> cartMap = (HashMap<Integer, CartDO>) req.getSession().getAttribute(Constant.CART_MAP);
         CartDO cartDO = cartMap.get(Integer.parseInt(auctionId));
         cartDO.setNumber(Integer.parseInt(count));
-        cartDO.setTotalPrice(cartDO.getNumber()*cartDO.getAuctionDO().getCurrentPrice());
+        DecimalFormat df = new DecimalFormat("#.00");
+        double currentPrice=cartDO.getAuctionDO().getCurrentPrice();
+        double totalPrice=Double.valueOf(df.format(currentPrice*cartDO.getNumber()));
+        cartDO.setTotalPrice(totalPrice);
     }
 
     @Override
