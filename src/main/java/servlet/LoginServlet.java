@@ -1,7 +1,7 @@
 package servlet;
 
 import dao.UserDao;
-import dao.daoimpl.UserDaoImpl;
+import dao.impl.UserDaoImpl;
 import entity.User;
 import util.Constant;
 

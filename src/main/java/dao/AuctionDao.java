@@ -20,4 +20,6 @@ public interface AuctionDao {
 
     AuctionDO getAuction(Integer id);
 
+    void addAcution(AuctionDO auctionDO);
+
 }

@@ -22,13 +22,12 @@ public class ProjectInit implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        //初始化加载商品类目
         List<Category> categoryList=categoryDao.getAllCategory();
-        System.out.println(categoryList);
         servletContextEvent.getServletContext().setAttribute(Constant.CATEGORY_LIST,categoryList);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
     }
 }

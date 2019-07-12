@@ -7,6 +7,7 @@ import lombok.ToString;
 @ToString
 public class AuctionDO {
 
+
     private Integer id;
 
     private Integer categoryId;

@@ -18,12 +18,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/cart.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/main.css">
     <script src="${pageContext.request.contextPath}/asset/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/sweetalert2.js"></script>
 </head>
 <body>
-<div id="app">
-    <div class="container">
-        <div>
-            <jsp:include page="/jsp/top.jsp"/>
+<div id="app" class="container">
+    <jsp:include page="/jsp/top.jsp"/>
+    <div >
+        <div >
             <table class="card-table table table-bordered table-hover">
                 <th>
                     <input id="checkAll" type="checkbox"/>
@@ -34,7 +35,7 @@
                 <td>金额</td>
                 <td>操作</td>
                 </th>
-                <c:forEach items="${cartList}" var="cart" >
+                <c:forEach items="${cartList}" var="cart">
                     <tr>
                         <td class="col-xs-1">
                             <input name="selectFlag" type="checkbox" @click="add(${cart.totalPrice},$event)">
@@ -57,14 +58,16 @@
                                                 <button class="btn btn-default" type="button" disabled>-</button>
                                             </c:if>
                                             <c:if test="${cart.number>1}">
-                                                <button class="btn btn-default" type="button" onclick="delCount(${cart.auctionDO.id},${cart.number},event)">-</button>
+                                                <button class="btn btn-default" type="button"
+                                                        onclick="delCount(${cart.auctionDO.id},${cart.number},event)">-</button>
                                             </c:if>
                                         </span>
                                         <input type="number" style="vertical-align:middle;text-align:center"
                                                value="${cart.number}"
                                                class="form-control">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" onclick="addCount(${cart.auctionDO.id},${cart.number},event)">+</button>
+                                            <button class="btn btn-default" type="button"
+                                                    onclick="addCount(${cart.auctionDO.id},${cart.number},event)">+</button>
                                         </span>
                                     </div><!-- /input-group -->
                                 </div><!-- /.col-lg-6 -->
@@ -74,7 +77,7 @@
                         <td class="col-xs-2">
                             <dl>
                                 <dt>
-                                    <a href="${pageContext.request.contextPath}/deleteCart?auctionId=${cart.auctionDO.id}">删除</a>
+                                    <span onclick="deleteAuction(${cart.auctionDO.id})">删除</span>
                                 </dt>
                                 <dt><a href="#">添加到收藏夹</a></dt>
                             </dl>
@@ -120,7 +123,7 @@
                 console.log(this.count)
             },
             selectAll() {
-                this.count = this.carts.map(e=>e.totalPrice).reduce((pre,cur) => pre+cur);
+                this.count = this.carts.map(e => e.totalPrice).reduce((pre, cur) => pre + cur);
             },
             delAll() {
                 this.count = 0;
@@ -128,43 +131,74 @@
         }
     });
 
-    function delCount(id,val,e){
+    function delCount(id, val, e) {
         console.log(e)
-        $.ajax({
-            url:"/handleCart",
-            methods:"POST",
-            data:{
-                auctionId:id,
-                count:val-1
-            },
-            success:(res)=>{
-                window.location.href="${pageContext.request.contextPath}"+"/cart";
+        Swal.fire({
+            title: '确定要删除该商品吗？',
+            // text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "/handleCart",
+                    methods: "POST",
+                    data: {
+                        auctionId: id,
+                        count: val - 1
+                    },
+                    success: (res) => {
+                        window.location.href = "${pageContext.request.contextPath}" + "/cart";
+                    }
+                })
             }
         })
     }
-    function addCount(id,val,e){
-        console.log(e)
-        $.ajax({
-            url:"/handleCart",
-            methods:"POST",
-            data:{
-                auctionId:id,
-                count:val+1
-            },
-            success:(res)=>{
-                window.location.href="${pageContext.request.contextPath}"+"/cart";
+
+
+    function deleteAuction(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "${pageContext.request.contextPath}/deleteCart?auctionId=${cart.auctionDO.id}";
             }
         })
     }
+
+    function addCount(id, val, e) {
+        console.log(e)
+        $.ajax({
+            url: "/handleCart",
+            methods: "POST",
+            data: {
+                auctionId: id,
+                count: val + 1
+            },
+            success: (res) => {
+                window.location.href = "${pageContext.request.contextPath}" + "/cart";
+            }
+        })
+    }
+
     $("#checkAll").click(function () {
         if (this.checked) {
             $("input[name='selectFlag']:checkbox").each(function () { //遍历所有的name为selectFlag的 checkbox
-                $(this).context.checked=true;
+                $(this).context.checked = true;
             })
             vm.selectAll();
         } else {
             $("input[name='selectFlag']:checkbox").each(function () { //遍历所有的name为selectFlag的 checkbox
-                $(this).context.checked=false;
+                $(this).context.checked = false;
             })
             vm.delAll();
         }

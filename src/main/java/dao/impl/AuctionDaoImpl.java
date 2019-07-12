@@ -1,7 +1,13 @@
-package dao.daoimpl;
+package dao.impl;
 
 import dao.AuctionDao;
 import entity.AuctionDO;
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import util.DBUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,24 +25,6 @@ import java.util.stream.Collectors;
 public class AuctionDaoImpl implements AuctionDao {
     private static List<AuctionDO> auctionList = new ArrayList<>();
     private static String[] categoryNames = {"女装", "母婴", "家电", "国际", "美妆", "鞋包", "男装"};
-    static {
-        DecimalFormat df = new DecimalFormat("#.00");
-        for (int i = 0; i < 100; i++) {
-            AuctionDO auctionDO = new AuctionDO();
-            auctionDO.setId(i);
-            auctionDO.setCategoryId(i);
-            auctionDO.setTitle("商品" + i);
-            double currentPrice=Math.random() * 100 + 100;
-            BigDecimal bg = new BigDecimal(currentPrice).setScale(2, RoundingMode.UP);
-            auctionDO.setCurrentPrice(Double.valueOf(df.format(currentPrice)));
-            auctionDO.setHisPrice(Double.valueOf(df.format(bg.doubleValue() - (int)(Math.random() * 200) + 100)));
-            auctionDO.setNumber((int) (Math.random() * 10000) + 1000);
-            auctionDO.setSellNumber((int) (Math.random() * 1000) + 1000);
-            auctionDO.setCategoryId((int)(Math.random()*7));
-            auctionDO.setDescription(new String(new char[9]).replace("\0",(categoryNames[auctionDO.getCategoryId()]+i)));
-            auctionList.add(auctionDO);
-        }
-    }
 
 
     @Override
@@ -60,8 +48,16 @@ public class AuctionDaoImpl implements AuctionDao {
 
     @Override
     public AuctionDO getAuction(Integer id) {
-        return auctionList.stream()
-                .filter(e -> e.getId().equals(id))
-                .findFirst().orElse(null);
+        String sql="select * from auction_do where id=?";
+        return (AuctionDO) DBUtil.process((QueryRunner qr) ->
+                qr.query(sql,
+                        new BeanHandler<AuctionDO>(AuctionDO.class, new BasicRowProcessor(new GenerousBeanProcessor())),
+                        id));
+    }
+
+    @Override
+    public void addAcution(AuctionDO auctionDO) {
+        auctionDO.setId(auctionList.get(auctionList.size()).getId()+1);
+        auctionList.add(auctionDO);
     }
 }

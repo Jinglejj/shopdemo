@@ -20,6 +20,7 @@
 .search-form .input-container input {
     width: 80%;
     border-style: none;
+    background-color: inherit;
 }
 
 .search-form .btn-search {

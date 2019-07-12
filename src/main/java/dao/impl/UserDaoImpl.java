@@ -1,18 +1,13 @@
-package dao.daoimpl;
+package dao.impl;
 
 import dao.UserDao;
 import entity.User;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import util.DBUtil;
 import util.Pagination;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDaoImpl implements UserDao {
 
